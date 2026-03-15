@@ -557,6 +557,7 @@ class Otlp extends utils.Adapter {
                     type: 'state',
                     common: {
                         name: 'Execution duration of the latest refresh cycle in milliseconds',
+                        role: 'time.span',
                         type: 'number',
                         read: true,
                         write: false,
