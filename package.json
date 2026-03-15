@@ -1,6 +1,6 @@
 {
   "name": "iobroker.otlp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The adapter allows pushing historical data into a OTLP-compatible gateway",
   "author": {
     "name": "OlliMartin",

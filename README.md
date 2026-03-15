@@ -75,8 +75,7 @@ Refer to the showcases below for practical examples:
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.2.1 (2026-03-15)
 
 * (OlliMartin) Add state role for refresh job execution duration
 
