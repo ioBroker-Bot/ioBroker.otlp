@@ -22,6 +22,7 @@
  * ########################################
  */
 
+import { Semaphore } from 'await-semaphore';
 import type { Gauge, Meter as IMeter } from '@opentelemetry/api';
 import type { PushMetricExporter, ResourceMetrics } from '@opentelemetry/sdk-metrics';
 import { MeterProvider, PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics';
@@ -78,6 +79,9 @@ class Otlp extends utils.Adapter {
     private _meter: IMeter | null = null;
 
     private _connected: boolean = false;
+
+    private readonly setValuesInterval: number = 1000 * 60;
+    private setValuesTimer: NodeJS.Timeout | null = null;
 
     // Mapping from AliasID to ioBroker ID
     private readonly _trackedDataPoints: {
@@ -152,6 +156,8 @@ class Otlp extends utils.Adapter {
 
         this.subscribeToStates();
         this.subscribeForeignObjects('*');
+
+        this.setValuesTimer = setInterval(this.periodicallySetValues.bind(this), this.setValuesInterval);
     }
 
     private createMeter(metricExporter: PushMetricExporter): void {
@@ -296,6 +302,10 @@ class Otlp extends utils.Adapter {
                 await this._meterProvider.shutdown();
             }
 
+            if (this.setValuesTimer) {
+                clearInterval(this.setValuesTimer);
+            }
+
             this.setConnected(false);
         } finally {
             callback();
@@ -351,7 +361,7 @@ class Otlp extends utils.Adapter {
             return;
         }
 
-        await this.writeInitialValueAsync(id);
+        await this.retrieveAndRecordValueAsync(id);
     }
 
     private addTrackedDataPoint(id: string, customConfig: OtlpCustomConfig): void {
@@ -396,7 +406,7 @@ class Otlp extends utils.Adapter {
         }
     }
 
-    async writeInitialValueAsync(id: string): Promise<void> {
+    async retrieveAndRecordValueAsync(id: string): Promise<void> {
         const state = await this.getForeignStateAsync(id);
 
         if (!state || !this._trackedDataPoints[id]) {
@@ -419,6 +429,47 @@ class Otlp extends utils.Adapter {
         }
 
         this.recordStateByIobId(id, state);
+    }
+
+    private async periodicallySetValues(): Promise<void> {
+        const numDataPoints = Object.keys(this._trackedDataPoints).length;
+
+        if (!this._meter || numDataPoints === 0) {
+            this.log.debug('No meter or tracked data points available, skipping periodic value update.');
+            return;
+        }
+
+        const startMs = performance.now();
+
+        this.log.debug(`Timer: Updating values for ${numDataPoints} tracked data points.`);
+
+        const semaphore = new Semaphore(8);
+
+        const allPromises = Object.keys(this._trackedDataPoints).map(async dPointId => {
+            let release: (() => void) | null = null;
+
+            try {
+                release = await semaphore.acquire();
+                await this.retrieveAndRecordValueAsync(dPointId);
+                return true;
+            } catch (e) {
+                this.log.error(
+                    `Unexpected error in worker execution for data point ${dPointId}: ${e instanceof Error ? e.message : JSON.stringify(e)}`,
+                );
+                return false;
+            } finally {
+                release?.call(release);
+            }
+        });
+
+        const allResults = await Promise.all(allPromises);
+
+        const successfulUpdates = allResults.filter(result => result).length;
+        const duration = performance.now() - startMs;
+
+        this.log.debug(
+            `Timer: Updated values for ${successfulUpdates}/${numDataPoints} tracked data points in ${duration}ms.`,
+        );
     }
 
     createEndpointAndExporter(): { endpoint: string | null; exporter: PushMetricExporter | null } {

@@ -21,6 +21,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
+var import_await_semaphore = require("await-semaphore");
 var import_sdk_metrics = require("@opentelemetry/sdk-metrics");
 var import_exporter_metrics_otlp_http = require("@opentelemetry/exporter-metrics-otlp-http");
 var import_exporter_metrics_otlp_grpc = require("@opentelemetry/exporter-metrics-otlp-grpc");
@@ -54,6 +55,8 @@ class Otlp extends utils.Adapter {
   _meterProvider = null;
   _meter = null;
   _connected = false;
+  setValuesInterval = 1e3 * 60;
+  setValuesTimer = null;
   // Mapping from AliasID to ioBroker ID
   _trackedDataPoints = {};
   _instrumentLookup = {};
@@ -101,6 +104,7 @@ class Otlp extends utils.Adapter {
     this.createMetricInstruments();
     this.subscribeToStates();
     this.subscribeForeignObjects("*");
+    this.setValuesTimer = setInterval(this.periodicallySetValues.bind(this), this.setValuesInterval);
   }
   createMeter(metricExporter) {
     var _a;
@@ -212,6 +216,9 @@ class Otlp extends utils.Adapter {
         await this._meterProvider.forceFlush();
         await this._meterProvider.shutdown();
       }
+      if (this.setValuesTimer) {
+        clearInterval(this.setValuesTimer);
+      }
       this.setConnected(false);
     } finally {
       callback();
@@ -299,6 +306,37 @@ class Otlp extends utils.Adapter {
       return;
     }
     this.recordStateByIobId(id, state);
+  }
+  async periodicallySetValues() {
+    const numDataPoints = Object.keys(this._trackedDataPoints).length;
+    if (!this._meter || numDataPoints === 0) {
+      this.log.debug("No meter or tracked data points available, skipping periodic value update.");
+      return;
+    }
+    const startMs = performance.now();
+    this.log.debug(`Timer: Updating values for ${numDataPoints} tracked data points.`);
+    const semaphore = new import_await_semaphore.Semaphore(8);
+    const allPromises = Object.keys(this._trackedDataPoints).map(async (dPointId) => {
+      let release = null;
+      try {
+        release = await semaphore.acquire();
+        await this.writeInitialValueAsync(dPointId);
+        return true;
+      } catch (e) {
+        this.log.error(
+          `Unexpected error in worker execution for data point ${dPointId}: ${e instanceof Error ? e.message : JSON.stringify(e)}`
+        );
+        return false;
+      } finally {
+        release == null ? void 0 : release.call(release);
+      }
+    });
+    const allResults = await Promise.all(allPromises);
+    const successfulUpdates = allResults.filter((result) => result).length;
+    const duration = performance.now() - startMs;
+    this.log.debug(
+      `Timer: Updated values for ${successfulUpdates}/${numDataPoints} tracked data points in ${duration}ms.`
+    );
   }
   createEndpointAndExporter() {
     let otlpEndpoint = null;
