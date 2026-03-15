@@ -1,142 +1,163 @@
 {
-    "common": {
-        "name": "otlp",
-        "version": "0.1.0",
-        "news": {
-            "0.1.0": {
-                "en": "Add missing layout column definitions to custom settings UI\nRemove unnecessary `noTranslation` flags\nRemove `.stop()` call on invalid configuration",
-                "de": "Fügen Sie fehlende Layoutspaltendefinitionen zu benutzerdefinierten Einstellungen UI hinzu\nEntfernen Sie unnötige `noTranslation` Flaggen\nEntfernen `.stop()` auf ungültige Konfiguration",
-                "ru": "Добавить недостающие определения колонок макета в пользовательские настройки UI\nУдалите ненужные флаги «без перевода»\nУдалить «.stop()» Вызов недействительной конфигурации",
-                "pt": "Adicionar as definições da coluna de disposição em falta à interface de configuração personalizada\nRemover bandeiras desnecessárias de `noTranslation'\nRemover `.stop()` chamada na configuração inválida",
-                "nl": "Ontbrekende kolomdefinities toevoegen aan aangepaste instellingen UI\nVerwijder onnodige Vertaalvlaggen\nVerwijderen aanroep bij ongeldige configuratie",
-                "fr": "Ajouter les définitions manquantes des colonnes de mise en page à l'interface utilisateur personnalisée\nSupprimer les drapeaux inutiles \"non traduction\"\nSupprimer `.stop()` appel à la configuration non valide",
-                "it": "Aggiungi definizioni della colonna di layout mancanti alle impostazioni personalizzate UI\nRimuovere non necessari `noTranslation` flags\nRimuovere `.stop()` chiamata su configurazione non valida",
-                "es": "Añadir definiciones de la columna de diseño perdido a la configuración personalizada UI\nEliminar las banderas innecesarias de la noTraducción\nRemove `.stop()` llamada configuración inválida",
-                "pl": "Dodaj brakujące definicje kolumn układu do ustawień użytkownika\nUsuń niepotrzebne flagi 'noTranslation'\nUsuń '.stop ()' wywołanie niepoprawnej konfiguracji",
-                "uk": "Додайте відсутні визначення стовпців для налаштування користувацького інтерфейсу\nВидалити непотрібні прапори `noTranslation`\nВидалити `.stop()` виклик на недійсній конфігурації",
-                "zh-cn": "在自定义设置中添加缺少的布局列定义 UI\n删除不必要的“ 无翻译” 旗帜\n删除`.stop()' 调用无效的配置"
-            },
-            "0.0.3": {
-                "en": "Include MIT Copyright Notice from [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
-                "de": "Inklusive MIT Urheberrechtshinweis von [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
-                "ru": "Включает MIT Уведомление об авторских правах от [ioBroker.influxdb] (https://github.com/ioBroker/ioBroker.influxdb)",
-                "pt": "Incluir o MIT (https://github.com/ioBroker/ioBroker.influxdb)",
-                "nl": "MIT opnemen Copyright Notice from [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
-                "fr": "Inclure le MIT Avis de copyright de [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
-                "it": "Includere MIT Avviso di copyright da [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
-                "es": "Incluido el MIT Copyright Aviso de [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
-                "pl": "Włączyć MIT W związku z tym, że w dniu 1 stycznia 2014 r",
-                "uk": "Включити MIT [ioBroker.influxdb] (https://github.com/ioBroker/ioBroker.influxdb)",
-                "zh-cn": "包含麻省理工学院 [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)的版权通知"
-            }
-        },
-        "titleLang": {
-            "en": "OpenTelemetry History Exporter",
-            "de": "OpenTelemetry History Exporter",
-            "ru": "Экспортер истории OpenTelemetry",
-            "pt": "Exportador de histórico OpenTelemetry",
-            "nl": "OpenTelemetry-geschiedenisexporteur",
-            "fr": "Exportateur d’historique OpenTelemetry",
-            "it": "Esportatore di cronologia OpenTelemetry",
-            "es": "Exportador de historial de OpenTelemetry",
-            "pl": "Eksporter historii OpenTelemetry",
-            "uk": "Програма експорту історії OpenTelemetry",
-            "zh-cn": "OpenTelemetry 历史记录导出器"
-        },
-        "desc": {
-            "en": "The adapter allows pushing historical data into a OTLP-compatible gateway",
-            "de": "Der Adapter ermöglicht die Übertragung historischer Daten an ein OTLP-kompatibles Gateway",
-            "ru": "Адаптер позволяет передавать исторические данные в OTLP-совместимый шлюз.",
-            "pt": "O adaptador permite enviar dados históricos para um gateway compatível com OTLP",
-            "nl": "Met de adapter kunnen historische gegevens naar een OTLP-compatibele gateway worden gepusht",
-            "fr": "L'adaptateur permet de transmettre des données historiques vers une passerelle compatible OTLP",
-            "it": "L'adattatore consente di inviare dati cronologici a un gateway compatibile con OTLP",
-            "es": "El adaptador permite enviar datos históricos a una puerta de enlace compatible con OTLP",
-            "pl": "Adapter umożliwia przesyłanie danych historycznych do bramki kompatybilnej z OTLP",
-            "uk": "Адаптер дозволяє надсилати історичні дані в OTLP-сумісний шлюз",
-            "zh-cn": "该适配器允许将历史数据推送到兼容 OTLP 的网关"
-        },
-        "authors": ["OlliMartin <oss@ollimart.in>"],
-        "keywords": ["OTLP", "OpenTelemetry", "history", "storage", "time-series"],
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "otlp.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/OlliMartin/ioBroker.otlp/main/admin/otlp.png",
-        "readme": "https://github.com/OlliMartin/ioBroker.otlp/blob/main/README.md",
-        "loglevel": "info",
-        "messagebox": true,
-        "tier": 1,
-        "mode": "daemon",
-        "type": "storage",
-        "getHistory": false,
-        "compact": true,
-        "eraseOnUpload": true,
-        "connectionType": "local",
-        "dataSource": "push",
-        "preserveSettings": "custom",
-        "supportCustoms": true,
-        "adminUI": {
-            "config": "json",
-            "custom": "json"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=6.0.11"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=7.6.17"
-            }
-        ]
+  "common": {
+    "name": "otlp",
+    "version": "0.2.0",
+    "news": {
+      "0.2.0": {
+        "en": "* Recurringly export data points/metrics (hardcoded to every minute)\n  * This fixes an issue where the OpenTelemetry Framework would stop exporting data after some time (~30 minutes) where the data did not change, which makes the metrics harder to consume in downstream services, because it produces gaps in the metrics. Especially Prometheus/Mimir cannot deal with missing values that well.\n* Add runtime (execution duration) state of periodic worker to be used as a metric itself (e.g. to monitor the performance of the adapter)\n\n<!--\n    Placeholder for the next version (at the beginning of the line):\n    ### **WORK IN PROGRESS**\n-->",
+        "de": "* Recurringly exportieren Datenpunkte / Metriken (gehärtet in jede Minute)\n* Damit wird ein Problem behoben, bei dem das OpenTelemetry Framework nach einiger Zeit (~30 Minuten) den Export von Daten stoppen würde, bei dem sich die Daten nicht änderten, was die Metriken in nachgeschalteten Diensten schwerer zu konsumieren macht, weil es Lücken in den Metriken erzeugt. Besonders Prometheus/Mimir kann nicht mit fehlenden Werten umgehen, die gut sind.\n* Fügen Sie Laufzeit (Ausführungsdauer) Zustand des periodischen Arbeiters hinzu, der als Metrik selbst verwendet werden soll (z.B. um die Leistung des Adapters zu überwachen)\n\n<!--\nPlatzhalter für die nächste Version (am Anfang der Linie):\n**WORK IN PROGRESS**\n-->",
+        "ru": "• Повторяющийся экспорт точек данных/метрик (твердо закодированных до каждой минуты)\n* Это устраняет проблему, когда OpenTelemetry Framework прекратит экспорт данных через некоторое время (~ 30 минут), когда данные не изменились, что затрудняет потребление показателей в службах нисходящего потока. Особенно Прометей/Мимир не может справиться с недостающими ценностями.\n* Добавить время выполнения (продолжительность выполнения) состояние периодического рабочего, которое будет использоваться в качестве самой метрики (например, для мониторинга производительности адаптера)\n\n<!--\nЗаполнитель для следующей версии (в начале строки):\n###*РАБОТА В ПРОГРЕСЕ**\n-->",
+        "pt": "* Recorrentemente exportar pontos de dados / métricas (hardcoded para cada minuto)\n* Isso corrige um problema onde o OpenTelemetry Framework pararia de exportar dados após algum tempo (~30 minutos) onde os dados não mudaram, o que torna as métricas mais difíceis de consumir em serviços a jusante, porque produz lacunas nas métricas. Especialmente Prometeu/Mimir não pode lidar tão bem com valores em falta.\n* Adicionar tempo de execução (duração da execução) estado do trabalhador periódico a ser usado como uma métrica em si (por exemplo, para monitorar o desempenho do adaptador)\n\n<!--\nPositivo para a próxima versão (no início da linha):\nTRABALHAR EM PROGRESSO\n-->",
+        "nl": "* Terugkerende datapunten/metrics exporteren (hardgecodeerd tot elke minuut)\n* Dit lost een probleem op waar het OpenTelemetry Framework na enige tijd (~30 minuten) zou stoppen met het exporteren van gegevens waar de gegevens niet veranderden, waardoor de metrics moeilijker te consumeren zijn in downstream services, omdat het lacunes in de metrics produceert. Vooral Prometheus/Mimir kan niet zo goed omgaan met ontbrekende waarden.\n* Voeg runtime (uitvoerduur) status van periodieke werknemer toe om te worden gebruikt als een metriek zelf (bijv. om de prestaties van de adapter te controleren)\n\n<!--\nPlaatshouder voor de volgende versie (aan het begin van de regel):\nWORK IN PROGRESS\n-->",
+        "fr": "* Exporter régulièrement des points/métriques de données (codé dur à chaque minute)\n* Cela corrige un problème où le cadre de télémétrie ouverte cesserait d'exporter des données après un certain temps (~30 minutes) où les données n'ont pas changé, ce qui rend les mesures plus difficiles à consommer dans les services en aval, parce qu'elles produisent des lacunes dans les mesures. Surtout Prométhée/Mimir ne peut pas gérer les valeurs manquantes si bien.\n* Ajouter l'état d'exécution (durée d'exécution) du travailleur périodique à utiliser comme métrique (par exemple pour surveiller les performances de l'adaptateur)\n\n<!--\nPlaceholder pour la prochaine version (au début de la ligne):\n### **WORK IN PROGRESS**\n-->",
+        "it": "* Recidivamente esportare punti di dati / metriche (codificati in ogni minuto)\n# Questo risolve un problema in cui l'OpenTelemetry Framework avrebbe smesso di esportare dati dopo qualche tempo (~30 minuti) dove i dati non sono cambiati, che rende le metriche più difficili da consumare nei servizi a valle, perché produce lacune nelle metriche. Soprattutto Prometheus/Mimir non può trattare con valori mancanti che bene.\n# Aggiungi runtime (durata dell'esecuzione) stato del lavoratore periodico da utilizzare come metrica stessa (ad esempio per monitorare le prestazioni dell'adattatore)\n\n<!--\nSegnaposto per la prossima versione (all'inizio della linea):\n######WORK IN PROGRESS #\n-->",
+        "es": "* Puntos/métricos de datos de exportación recurrente (definidos a cada minuto)\n* Esto resuelve un problema en el que el Marco OpenTelemetry dejaría de exportar datos después de algún tiempo (~30 minutos) donde los datos no cambiaron, lo que hace que las métricas más difíciles de consumir en los servicios de aguas abajo, porque produce lagunas en las métricas. Especialmente Prometheus/Mimir no puede tratar con valores perdidos tan bien.\n* Añadir tiempo de ejecución (duración de ejecución) estado de trabajador periódico para ser utilizado como métrica (por ejemplo, para monitorear el rendimiento del adaptador)\n\n<!--\nTitular para la próxima versión (al principio de la línea):\n#### **WORK IN PROGRESS**\n-->",
+        "pl": "* Wielokrotnie eksportowe punkty danych / metrics (zaszyfrowane do każdej minuty)\n* To rozwiązuje problem, w którym ramy OpenTelemetry przestałyby eksportować dane po pewnym czasie (~ 30 minut), gdzie dane nie uległy zmianie, co sprawia, że wskaźniki są trudniejsze do wykorzystania w dalszych usługach, ponieważ generują luki w danych. Zwłaszcza Prometeusz / Mimir nie może sobie poradzić z brakującymi wartościami.\n* Dodać stan pracy (czas wykonania) pracownika okresowego, który ma być stosowany jako sam metr (np. do monitorowania działania adaptera)\n\n<!--\nUchwyt do następnej wersji (na początku wiersza):\n** * WORK IN PROGRESS **\n-->",
+        "uk": "* Потрібно експортувати точки/метрики (затверджено на кожну хвилину)\nІм'я * Це закріплює проблему, де Рамка OpenTelemetry буде припинена експорт даних після деякого часу (~30 хвилин), де дані не змінювалися, що робить метрики важче споживати в потоку послуг, оскільки вона виробляє зазори в метриці. Тим не менш, не може мати ніяких значень, які добре.\nІм'я * Додайте тривалість виконання (виконання) стану періодичного працівника, який використовується як сам метричний (наприклад, для контролю виконання адаптера)\n\n<!--\nМісцевласника для наступної версії (на початку лінії):\n###**\n-->",
+        "zh-cn": "* 经常输出数据点/计量(硬码为每分钟)\n* 《大会正式记录,第五十八届会议,补编第5号》(A/C.6/61/Rev.1)。 这解决了一个问题,即OpenTeleometter Framework在数据没有变化的一段时间(~30分钟)后将停止输出数据,这使得下游服务中计量标准更难消耗,因为它造成了计量标准的漏洞. 特别是普罗米修斯/米米尔无法很好地处理缺失的值.\n* 《大会正式记录,第五十八届会议,补编第5号》(A/C.6/61/Rev.1)。 增加周期工人的运行时间(执行期限)状态,作为衡量标准本身(如监测适配器的性能)\n\n<!--\n下一个版本(行首)的占位符 :\n** 工作进展**\n-->"
+      },
+      "0.1.0": {
+        "en": "Add missing layout column definitions to custom settings UI\nRemove unnecessary `noTranslation` flags\nRemove `.stop()` call on invalid configuration",
+        "de": "Fügen Sie fehlende Layoutspaltendefinitionen zu benutzerdefinierten Einstellungen UI hinzu\nEntfernen Sie unnötige `noTranslation` Flaggen\nEntfernen `.stop()` auf ungültige Konfiguration",
+        "ru": "Добавить недостающие определения колонок макета в пользовательские настройки UI\nУдалите ненужные флаги «без перевода»\nУдалить «.stop()» Вызов недействительной конфигурации",
+        "pt": "Adicionar as definições da coluna de disposição em falta à interface de configuração personalizada\nRemover bandeiras desnecessárias de `noTranslation'\nRemover `.stop()` chamada na configuração inválida",
+        "nl": "Ontbrekende kolomdefinities toevoegen aan aangepaste instellingen UI\nVerwijder onnodige Vertaalvlaggen\nVerwijderen aanroep bij ongeldige configuratie",
+        "fr": "Ajouter les définitions manquantes des colonnes de mise en page à l'interface utilisateur personnalisée\nSupprimer les drapeaux inutiles \"non traduction\"\nSupprimer `.stop()` appel à la configuration non valide",
+        "it": "Aggiungi definizioni della colonna di layout mancanti alle impostazioni personalizzate UI\nRimuovere non necessari `noTranslation` flags\nRimuovere `.stop()` chiamata su configurazione non valida",
+        "es": "Añadir definiciones de la columna de diseño perdido a la configuración personalizada UI\nEliminar las banderas innecesarias de la noTraducción\nRemove `.stop()` llamada configuración inválida",
+        "pl": "Dodaj brakujące definicje kolumn układu do ustawień użytkownika\nUsuń niepotrzebne flagi 'noTranslation'\nUsuń '.stop ()' wywołanie niepoprawnej konfiguracji",
+        "uk": "Додайте відсутні визначення стовпців для налаштування користувацького інтерфейсу\nВидалити непотрібні прапори `noTranslation`\nВидалити `.stop()` виклик на недійсній конфігурації",
+        "zh-cn": "在自定义设置中添加缺少的布局列定义 UI\n删除不必要的“ 无翻译” 旗帜\n删除`.stop()' 调用无效的配置"
+      },
+      "0.0.3": {
+        "en": "Include MIT Copyright Notice from [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
+        "de": "Inklusive MIT Urheberrechtshinweis von [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
+        "ru": "Включает MIT Уведомление об авторских правах от [ioBroker.influxdb] (https://github.com/ioBroker/ioBroker.influxdb)",
+        "pt": "Incluir o MIT (https://github.com/ioBroker/ioBroker.influxdb)",
+        "nl": "MIT opnemen Copyright Notice from [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
+        "fr": "Inclure le MIT Avis de copyright de [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
+        "it": "Includere MIT Avviso di copyright da [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
+        "es": "Incluido el MIT Copyright Aviso de [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)",
+        "pl": "Włączyć MIT W związku z tym, że w dniu 1 stycznia 2014 r",
+        "uk": "Включити MIT [ioBroker.influxdb] (https://github.com/ioBroker/ioBroker.influxdb)",
+        "zh-cn": "包含麻省理工学院 [ioBroker.influxdb](https://github.com/ioBroker/ioBroker.influxdb)的版权通知"
+      }
     },
-    "native": {
-        "host": "localhost",
-        "protocol": "http",
-        "otlProtocol": "grpc",
-        "meterName": "ioBroker.otlp",
-        "port": 4317,
-        "headers": [],
-        "resourceAttributes": []
+    "titleLang": {
+      "en": "OpenTelemetry History Exporter",
+      "de": "OpenTelemetry History Exporter",
+      "ru": "Экспортер истории OpenTelemetry",
+      "pt": "Exportador de histórico OpenTelemetry",
+      "nl": "OpenTelemetry-geschiedenisexporteur",
+      "fr": "Exportateur d’historique OpenTelemetry",
+      "it": "Esportatore di cronologia OpenTelemetry",
+      "es": "Exportador de historial de OpenTelemetry",
+      "pl": "Eksporter historii OpenTelemetry",
+      "uk": "Програма експорту історії OpenTelemetry",
+      "zh-cn": "OpenTelemetry 历史记录导出器"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If connected to OTLP Gateway",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.refreshTimerRuntime",
-            "type": "state",
-            "common": {
-                "name": "Execution duration of the latest refresh cycle in milliseconds",
-                "type": "number",
-                "read": true,
-                "write": false,
-                "def": 0
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "The adapter allows pushing historical data into a OTLP-compatible gateway",
+      "de": "Der Adapter ermöglicht die Übertragung historischer Daten an ein OTLP-kompatibles Gateway",
+      "ru": "Адаптер позволяет передавать исторические данные в OTLP-совместимый шлюз.",
+      "pt": "O adaptador permite enviar dados históricos para um gateway compatível com OTLP",
+      "nl": "Met de adapter kunnen historische gegevens naar een OTLP-compatibele gateway worden gepusht",
+      "fr": "L'adaptateur permet de transmettre des données historiques vers une passerelle compatible OTLP",
+      "it": "L'adattatore consente di inviare dati cronologici a un gateway compatibile con OTLP",
+      "es": "El adaptador permite enviar datos históricos a una puerta de enlace compatible con OTLP",
+      "pl": "Adapter umożliwia przesyłanie danych historycznych do bramki kompatybilnej z OTLP",
+      "uk": "Адаптер дозволяє надсилати історичні дані в OTLP-сумісний шлюз",
+      "zh-cn": "该适配器允许将历史数据推送到兼容 OTLP 的网关"
+    },
+    "authors": [
+      "OlliMartin <oss@ollimart.in>"
+    ],
+    "keywords": [
+      "OTLP",
+      "OpenTelemetry",
+      "history",
+      "storage",
+      "time-series"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "otlp.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/OlliMartin/ioBroker.otlp/main/admin/otlp.png",
+    "readme": "https://github.com/OlliMartin/ioBroker.otlp/blob/main/README.md",
+    "loglevel": "info",
+    "messagebox": true,
+    "tier": 1,
+    "mode": "daemon",
+    "type": "storage",
+    "getHistory": false,
+    "compact": true,
+    "eraseOnUpload": true,
+    "connectionType": "local",
+    "dataSource": "push",
+    "preserveSettings": "custom",
+    "supportCustoms": true,
+    "adminUI": {
+      "config": "json",
+      "custom": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.17"
+      }
     ]
+  },
+  "native": {
+    "host": "localhost",
+    "protocol": "http",
+    "otlProtocol": "grpc",
+    "meterName": "ioBroker.otlp",
+    "port": 4317,
+    "headers": [],
+    "resourceAttributes": []
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If connected to OTLP Gateway",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.refreshTimerRuntime",
+      "type": "state",
+      "common": {
+        "name": "Execution duration of the latest refresh cycle in milliseconds",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": 0
+      },
+      "native": {}
+    }
+  ]
 }
